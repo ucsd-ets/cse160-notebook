@@ -14,6 +14,7 @@ RUN apt-get update -y && \
     vim \
     openssh-client \
     openssh-server \
+    netcat \
     cmake \
     tmux \
     screen \
