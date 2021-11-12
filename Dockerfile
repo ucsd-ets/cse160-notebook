@@ -13,6 +13,7 @@ RUN apt-get update -y && \
     nano \
     vim \
     openssh-client \
+    openssh-server \
     cmake \
     tmux \
     screen \
