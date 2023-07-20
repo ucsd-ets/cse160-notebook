@@ -24,6 +24,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build intermediate nvcr-cuda image
+        run: scripts/build-intermediate-nvcr-cuda.sh
+
       - name: Generate tags and labels
         id: meta
         uses: docker/metadata-action@v4
