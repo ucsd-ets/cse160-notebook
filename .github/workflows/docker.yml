@@ -14,6 +14,21 @@ jobs:
       packages: write
 
     steps:
+      - name: Docker/ENV cleanup Cleanup
+        run: |
+          docker image prune -a -f
+          docker container prune -f
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+      - name: Check Free Space 1
+        run: |
+          echo "Free space:"
+          df -h
+
       - name: Checkout notebook
         uses: actions/checkout@v3
 
@@ -26,6 +41,11 @@ jobs:
 
       - name: Build intermediate nvcr-cuda image
         run: scripts/build-intermediate-nvcr-cuda.sh
+
+      - name: Check Free Space 2
+        run: |
+          echo "Free space:"
+          df -h
 
       - name: Generate tags and labels
         id: meta
