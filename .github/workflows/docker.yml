@@ -39,9 +39,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build intermediate nvcr-cuda image
-        run: scripts/build-intermediate-nvcr-cuda.sh
-
       - name: Check Free Space 2
         run: |
           echo "Free space:"
@@ -60,3 +57,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Check Free Space 3
+        run: |
+          echo "Free space:"
+          df -h
+
