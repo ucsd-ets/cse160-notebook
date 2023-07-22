@@ -1,16 +1,10 @@
 ARG PYTHON_VERSION=python-3.9.5
 FROM jupyter/base-notebook:$PYTHON_VERSION
-# coerce change in all notebook
 USER root
 
 # see https://github.com/phusion/baseimage-docker/issues/319#issuecomment-1058835363
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS="yes"
-
-#COPY --from=nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04 /usr/local/cuda-11.8 /usr/local/cuda-11.8
-
-COPY --from=nvcr.io/nvidia/cuda:11.2.0-devel-ubuntu20.04 /usr/local/cuda-11.2 /usr/local/cuda-11.2
-RUN ln -s cuda-11.2 /usr/local/cuda && ln -s cuda-11.2 /usr/local/cuda-11
 
 RUN apt-get update -y && \
     apt-get -qq install -y --no-install-recommends \
@@ -37,6 +31,19 @@ RUN apt-get update -y && \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     chmod g-s /usr/bin/screen && \
     chmod 1777 /var/run/screen
+
+######################################
+# Now add in CUDA-11.2 tools/libraries
+COPY --from=nvcr.io/nvidia/cuda:11.2.0-devel-ubuntu20.04 /usr/local/cuda-11.2 /usr/local/cuda-11.2
+RUN ln -s cuda-11.2 /usr/local/cuda && ln -s cuda-11.2 /usr/local/cuda-11
+
+# Configure dynamic library locations (similar to LD_LIBRARY_PATH)
+RUN echo '/usr/local/cuda/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/000_cuda.conf && \
+    echo '/usr/local/cuda-11/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/989_cuda-11.conf && \
+    ( echo '/usr/local/nvidia/lib'; echo '/usr/local/nvidia/lib64' ) >> /etc/ld.so.conf.d/nvidia.conf
+
+###########################################
+# Remainder of install as nonprivleged user
 
 USER jovyan
 
