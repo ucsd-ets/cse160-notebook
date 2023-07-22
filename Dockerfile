@@ -7,9 +7,10 @@ USER root
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS="yes"
 
-COPY --from=nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04 /usr/local/cuda-11.8 /usr/local/cuda-11.8
+#COPY --from=nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04 /usr/local/cuda-11.8 /usr/local/cuda-11.8
 
-RUN ln -s cuda-11.8 /usr/local/cuda && ln -s cuda-11.8 /usr/local/cuda-11
+COPY --from= nvcr.io/nvidia/cuda:11.2.0-devel-ubuntu20.04 /usr/local/cuda-11.2 /usr/local/cuda-11.2
+RUN ln -s cuda-11.2 /usr/local/cuda && ln -s cuda-11.2 /usr/local/cuda-11
 
 RUN apt-get update -y && \
     apt-get -qq install -y --no-install-recommends \
