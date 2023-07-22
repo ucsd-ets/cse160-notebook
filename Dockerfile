@@ -40,7 +40,8 @@ RUN ln -s cuda-11.2 /usr/local/cuda && ln -s cuda-11.2 /usr/local/cuda-11
 # Configure dynamic library locations (similar to LD_LIBRARY_PATH)
 RUN echo '/usr/local/cuda/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/000_cuda.conf && \
     echo '/usr/local/cuda-11/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/989_cuda-11.conf && \
-    ( echo '/usr/local/nvidia/lib'; echo '/usr/local/nvidia/lib64' ) >> /etc/ld.so.conf.d/nvidia.conf
+    ( echo '/usr/local/nvidia/lib'; echo '/usr/local/nvidia/lib64' ) >> /etc/ld.so.conf.d/nvidia.conf && \
+    ldconfig -a
 
 ###########################################
 # Remainder of install as nonprivleged user
