@@ -43,6 +43,8 @@ RUN echo '/usr/local/cuda/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/000_cud
     ( echo '/usr/local/nvidia/lib'; echo '/usr/local/nvidia/lib64' ) >> /etc/ld.so.conf.d/nvidia.conf && \
     ldconfig 
 
+ENV CUDA_HOME=/usr/local/cuda
+
 ###########################################
 # Remainder of install as nonprivleged user
 
