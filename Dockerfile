@@ -33,9 +33,9 @@ RUN apt-get update -y && \
     chmod 1777 /var/run/screen
 
 ######################################
-# Now add in CUDA-11.2 tools/libraries
-COPY --from=nvcr.io/nvidia/cuda:11.2.0-devel-ubuntu20.04 /usr/local/cuda-11.2 /usr/local/cuda-11.2
-RUN ln -s cuda-11.2 /usr/local/cuda && ln -s cuda-11.2 /usr/local/cuda-11
+# Now add in CUDA-11.8 tools/libraries
+COPY --from=nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04 /usr/local/cuda-11.8 /usr/local/cuda-11.8
+RUN ln -s cuda-11.8 /usr/local/cuda && ln -s cuda-11.8 /usr/local/cuda-11
 
 # Configure dynamic library locations (similar to LD_LIBRARY_PATH)
 RUN echo '/usr/local/cuda/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/000_cuda.conf && \
