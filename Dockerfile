@@ -28,6 +28,7 @@ RUN apt-get update -y && \
     jq \
     p7zip-full \
     build-essential \
+    netcat \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     chmod g-s /usr/bin/screen && \
     chmod 1777 /var/run/screen
