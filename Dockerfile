@@ -46,6 +46,8 @@ RUN echo '/usr/local/cuda/targets/x86_64-linux/lib' >> /etc/ld.so.conf.d/000_cud
 
 ENV CUDA_HOME=/usr/local/cuda
 
+ENV PATH="${CUDA_HOME}/bin:${PATH}"
+
 ###########################################
 # Remainder of install as nonprivleged user
 
