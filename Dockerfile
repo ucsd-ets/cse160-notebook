@@ -78,3 +78,7 @@ FROM ghcr.io/ucsd-ets/nvcr-cuda:main
 #
 ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH \
     LD_LIBRARY_PATH=/usr/local/nvidia/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+# EXAMPLE
+# RUN wget libraries \
+#     install ...
