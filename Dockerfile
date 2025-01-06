@@ -74,3 +74,6 @@ RUN pip install dpkt \
 WORKDIR /home/jovyan
 
 USER jovyan
+
+ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH \
+    LD_LIBRARY_PATH=/usr/local/nvidia/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
