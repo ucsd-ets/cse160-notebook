@@ -79,6 +79,12 @@ FROM ghcr.io/ucsd-ets/nvcr-cuda:main
 ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH \
     LD_LIBRARY_PATH=/usr/local/nvidia/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
+# Set up OpenCl enviroment
+RUN mkdir -p /etc/OpenCl/vendors && \
+    echo ""/usr/local/nvidia/lib64/libnvidia-opencl.so.525.53" > /etc/OpenCL/vendors/nvidia.icd"
+
+ENV OCL_ICD_VENDORS=/etc/OpenCL/vendors
+
 # EXAMPLE
 # RUN wget libraries \
 #     install ...
