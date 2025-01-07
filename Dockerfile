@@ -8,10 +8,10 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN apt-get update && apt-get install -y build-essential \
                         git \
-                        clang \
-                        libclang-cpp10 \
-                        libclang-dev \
-                        libclang-cpp10-dev \
+                        clang-12 \
+                        libclang-cpp12 \
+                        libclang-12-dev \
+                        libclang-cpp12-dev \
                         python3-dev \
                         libpython3-dev \
                         ocl-icd-libopencl1 \
@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y build-essential \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-                        llvm-dev \
+                        llvm-12 \
+                        llvm-12-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NVIDIA does not provide OpenCL passthru.
