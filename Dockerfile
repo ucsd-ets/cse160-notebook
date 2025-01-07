@@ -9,10 +9,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN apt-get update && apt-get install -y build-essential \
                         git \
                         clang \
-                        libclang-cpp12 \
+                        libclang-cpp10 \
                         libclang-dev \
-                        libclang-cpp12-dev \
-                        llvm \
+                        libclang-cpp10-dev \
                         python3-dev \
                         libpython3-dev \
                         ocl-icd-libopencl1 \
