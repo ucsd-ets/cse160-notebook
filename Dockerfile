@@ -9,6 +9,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN apt-get update && apt-get install -y build-essential \
                         git \
                         clang \
+                        libclang-cpp12 \
                         libclang-dev \
                         libclang-cpp12-dev \
                         llvm \
