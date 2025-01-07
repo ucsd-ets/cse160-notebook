@@ -6,8 +6,7 @@ USER root
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y sudo \
-                        build-essential \
+RUN apt-get update && apt-get install -y build-essential \
                         git \
                         libssl-dev \
                         zlib1g-dev \
@@ -43,7 +42,7 @@ RUN apt-get update && apt-get install -y sudo \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-                        libclang-cpp-dev \
+                        libclang-cpp12-dev \
                         llvm-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
