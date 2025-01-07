@@ -76,22 +76,6 @@ FROM ghcr.io/ucsd-ets/nvcr-cuda:main
 #
 #USER jovyan
 #
-
-# Switch to root
-USER root
-
-# Install OpenCL libraries
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        ocl-icd-libopencl1 \
-        ocl-icd-opencl-dev \
-        opencl-headers \
-        clinfo \
-    && rm -rf /var/lib/apt/lists/*
-
-# Switch back to the non-root user (optional)
-USER jovyan
-
 # ENV PATH=/usr/local/cuda/bin:$PATH \
 #     LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
