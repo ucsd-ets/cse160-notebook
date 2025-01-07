@@ -1,7 +1,67 @@
 FROM ghcr.io/ucsd-ets/nvcr-cuda:main
 USER root
-RUN apt-get update && \
-    apt-get -y install clinfo
+
+#====== Instructor Addition ======
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y sudo \
+                        build-essential \
+                        git \
+                        libssl-dev \
+                        zlib1g-dev \
+                        libbz2-dev \
+                        libreadline-dev \
+                        libsqlite3-dev \
+                        wget \
+                        curl \
+                        llvm \
+                        libncurses5-dev \
+                        libncursesw5-dev \
+                        xz-utils \
+                        tk-dev \
+                        libffi-dev \
+                        liblzma-dev \
+                        python3-openssl \
+                        libopencv-dev \
+                        clang \
+                        libclang-dev \
+                        llvm \
+                        python3-dev \
+                        libpython3-dev \
+                        ocl-icd-libopencl1 \
+                        cmake \
+                        pkg-config \
+                        make \
+                        ninja-build \
+                        ocl-icd-libopencl1 \
+                        ocl-icd-dev \
+                        ocl-icd-opencl-dev \
+                        libhwloc-dev \
+                        clinfo \
+                        dialog \
+                        apt-utils \
+                        libxml2-dev \
+                        libclang-cpp-dev \
+                        llvm-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# NVIDIA does not provide OpenCL passthru.
+# POCL supports a CUDA-based OpenCL driver
+RUN git clone https://github.com/pocl/pocl.git /pocl
+WORKDIR /pocl
+RUN git checkout v6.0
+RUN mkdir build
+WORKDIR /pocl/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DENABLE_CUDA=ON .. && \
+    make -j && \
+    make install && \
+    rm -rf /pocl
+
+#====== End Instructor Addition ===
+
+
 #ARG PYTHON_VERSION=python-3.9.5
 #FROM jupyter/base-notebook:$PYTHON_VERSION
 #USER root
