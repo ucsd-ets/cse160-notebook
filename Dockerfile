@@ -9,7 +9,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN apt-get update && apt-get install -y build-essential \
                         git \
                         clang \
-                        libclang12-dev \
+                        libclang-dev \
+                        libclang-cpp-dev \
                         llvm \
                         python3-dev \
                         libpython3-dev \
