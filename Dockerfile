@@ -1,4 +1,6 @@
 FROM ghcr.io/ucsd-ets/nvcr-cuda:main
+RUN apt-get update && \
+    apt-get -y install clinfo
 #ARG PYTHON_VERSION=python-3.9.5
 #FROM jupyter/base-notebook:$PYTHON_VERSION
 #USER root
