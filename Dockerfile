@@ -8,24 +8,8 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN apt-get update && apt-get install -y build-essential \
                         git \
-                        libssl-dev \
-                        zlib1g-dev \
-                        libbz2-dev \
-                        libreadline-dev \
-                        libsqlite3-dev \
-                        wget \
-                        curl \
-                        llvm \
-                        libncurses5-dev \
-                        libncursesw5-dev \
-                        xz-utils \
-                        tk-dev \
-                        libffi-dev \
-                        liblzma-dev \
-                        python3-openssl \
-                        libopencv-dev \
                         clang \
-                        libclang-dev \
+                        libclang12-dev \
                         llvm \
                         python3-dev \
                         libpython3-dev \
@@ -42,7 +26,6 @@ RUN apt-get update && apt-get install -y build-essential \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-                        libclang-cpp12-dev \
                         llvm-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -50,7 +33,7 @@ RUN apt-get update && apt-get install -y build-essential \
 # POCL supports a CUDA-based OpenCL driver
 RUN git clone https://github.com/pocl/pocl.git /pocl
 WORKDIR /pocl
-RUN git checkout v6.0
+RUN git checkout v5.0
 RUN mkdir build
 WORKDIR /pocl/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DENABLE_CUDA=ON .. && \
