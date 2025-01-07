@@ -77,22 +77,20 @@ FROM ghcr.io/ucsd-ets/nvcr-cuda:main
 #USER jovyan
 #
 
-# Install OpenCL libraries and a quick "clinfo" tool for debugging
+# Switch to root
+USER root
+
+# Install OpenCL libraries
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      ocl-icd-libopencl1 \
-      ocl-icd-opencl-dev \
-      opencl-headers \
-      clinfo \
+        ocl-icd-libopencl1 \
+        ocl-icd-opencl-dev \
+        opencl-headers \
+        clinfo \
     && rm -rf /var/lib/apt/lists/*
 
-# Optionally set PATH and LD_LIBRARY_PATH if needed
-ENV PATH="/usr/local/cuda/bin:${PATH}"
-ENV LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"
-
-# For demonstration, run `clinfo` to confirm OpenCL works
-RUN clinfo
-
+# Switch back to the non-root user (optional)
+USER jovyan
 
 # ENV PATH=/usr/local/cuda/bin:$PATH \
 #     LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
