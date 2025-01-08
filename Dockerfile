@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.2-devel-ubuntu24.04
+FROM nvidia/cuda:12.2.2-devel-ubuntu24.04
 USER root
 
 #====== Instructor Addition ======
