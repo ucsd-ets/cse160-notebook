@@ -1,4 +1,4 @@
-FROM ghcr.io/ucsd-ets/nvcr-cuda:main
+FROM nvidia/cuda:12.6.1-devel-ubuntu24.04
 USER root
 
 #====== Instructor Addition ======
@@ -8,13 +8,11 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN apt-get update && apt-get install -y build-essential \
                         git \
-                        clang-12 \
-                        libclang-cpp12 \
-                        libclang-12-dev \
-                        libclang-cpp12-dev \
-                        python3-dev \
-                        libpython3-dev \
-                        ocl-icd-libopencl1 \
+                        llvm \
+                        libclang-cpp-dev \
+                        llvm-dev \
+                        clang \
+                        libclang-dev \
                         cmake \
                         pkg-config \
                         make \
@@ -27,15 +25,13 @@ RUN apt-get update && apt-get install -y build-essential \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-                        llvm-12 \
-                        llvm-12-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NVIDIA does not provide OpenCL passthru.
 # POCL supports a CUDA-based OpenCL driver
 RUN git clone https://github.com/pocl/pocl.git /pocl
 WORKDIR /pocl
-RUN git checkout v5.0
+RUN git checkout v6.0
 RUN mkdir build
 WORKDIR /pocl/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DENABLE_CUDA=ON .. && \
