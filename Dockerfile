@@ -25,8 +25,9 @@ RUN apt-get update && apt-get install -y build-essential \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-netcat \
-openssh-server \
+                        netcat \
+                        openssh-server \
+                        vim \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NVIDIA does not provide OpenCL passthru.
