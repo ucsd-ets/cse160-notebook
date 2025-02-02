@@ -3,6 +3,10 @@ USER root
 
 #====== Instructor Addition ======
 
+RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \
+        | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null && \
+        echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
+
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -17,6 +21,8 @@ RUN apt-get update && apt-get install -y build-essential \
                         pkg-config \
                         make \
                         ninja-build \
+                        intel-oneapi-runtime-libs \
+                        opencl-headers \
                         ocl-icd-libopencl1 \
                         ocl-icd-dev \
                         ocl-icd-opencl-dev \
