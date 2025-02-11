@@ -51,6 +51,17 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DENABLE_CUDA=ON .
     make install && \
     rm -rf /pocl
 
+# OpenCL Intercept Layer
+RUN git clone https://github.com/intel/opencl-intercept-layer.git /opencl-intercept-layer
+WORKDIR /opencl-intercept-layer
+RUN git checkout v3.0.5
+RUN mkdir build
+WORKDIR /opencl-intercept-layer/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ .. && \
+    make -j && \
+    make install && \
+    rm -rf /opencl-intercept-layer
+
 #====== End Instructor Addition ===
 
 
