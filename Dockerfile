@@ -32,8 +32,6 @@ RUN apt-get update && apt-get install -y build-essential \
                         dialog \
                         apt-utils \
                         libxml2-dev \
-                        netcat \
-                        openssh-server \
                         vim \
                         gdb \
                         valgrind \
